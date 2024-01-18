@@ -1,7 +1,8 @@
+streamlit
 langchain
+Pillow
+python-dotenv
 st_chat_message
-PIL
-base64
-io
-dotenv
-json
+openai
+chromadb
+tiktoken
