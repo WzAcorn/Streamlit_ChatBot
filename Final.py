@@ -22,7 +22,7 @@ from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 import json
 
 # 이미지 파일 로드
-image_path = "Wiznet.PNG"
+image_path = "Wiznet.png"
 
 # 이미지 로드 및 인코딩 함수
 def load_and_encode_image(image_path):
