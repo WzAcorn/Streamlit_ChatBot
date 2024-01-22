@@ -41,6 +41,8 @@ st.markdown("""
     }
     </style>
     <div class="title">💬 WiZnet Chatbot Test</div>
+    <div>민윤홍의 개인 공부용 배포 웹사이트 입니다. 기능이 완전 동작하지 않아요.</div>
+
     """, unsafe_allow_html=True)
 st.write("---")
 img_html = f'<div style="text-align: center;"><img src="data:image/jpeg;base64,{image_str}" style="width:auto;"/></div>'
@@ -93,6 +95,8 @@ vectordb = Chroma.from_documents(
 vectordb = Chroma(
     persist_directory = persist_directory, 
     embedding_function=embedding)
+
+print(vectordb)
 
 # 검색 기능 설정
 retriever = vectordb.as_retriever(search_kwargs={"k":2})
