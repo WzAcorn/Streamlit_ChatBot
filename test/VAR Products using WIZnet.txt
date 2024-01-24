@@ -1,0 +1,5 @@
+# VAR Products using WIZnet
+
+[](https://docs.wiznet.io/VAR-Products-using-WIZnet/var_products_using_wiznet#ethernet-shield)
+
+Ethernet Shield's, WiFi Shield,BLE to Ethernet, W5500BoB(ESoPe), W5500CoB (EsoPe), 3rd Party VAR offerings can be found at the links below. [https://docs.wiznet.io/VAR-Products-using-WIZnet/var_products_using_wiznet](https://docs.wiznet.io/VAR-Products-using-WIZnet/var_products_using_wiznet)

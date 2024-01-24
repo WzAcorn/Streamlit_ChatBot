@@ -1,0 +1,25 @@
+# WIZ820io
+
+---
+
+## WIZ820io Overview
+
+WIZ820io is the compact-sized network module that includes W5200 (TCP/IP & Ethernet MAC & PHY) & MAG-JACK (RJ45 with X’FMR) with other glue logics. It can be used as a component and no effort is required to interface W5200 and MAG Jack. The WIZ820io is an ideal option for users who want to develop their Internet enabling systems rapidly.
+
+## WIZ820io Features
+
+- Plug-in Network Module
+- Usable without H/W design for W5200, transformer & RJ-45
+- Fast evaluation for W5200 & MCU in the target board
+- Support high speed SPI interface
+- Support 8 hardware sockets
+- Support power down mode and Wake-on-LAN function
+- Very small form factor (PCB size : 23mm x 25mm)
+
+---
+
+### WIZ820io Datasheet
+
+- [WIZ820Sio Datasheet](https://www.wiznet.io/wp-content/uploads/2019/01/WIZ810Sio-User-Manual-V1.0-002.pdf)
+
+---

@@ -1,0 +1,266 @@
+# W7500
+
+The W7500 chip, part of the IOP4IoT series, integrates several features suitable for various embedded application platforms. It's built around an ARM Cortex-M0 core with a maximum frequency of 48MHz, and it includes a hardwired TCP/IP core with a market-proven stack that supports TCP, UDP, IPv4, ICMP, ARP, IGMP, and PPPoE. This TCP/IP core, used in numerous applications for over 15 years, provides reliable internet connectivity.
+
+The W7500 also boasts significant memory capabilities, including 128 KB of Flash memory, 16 KB of SRAM, and a 6 KB ROM for boot code. It's designed for efficient power and clock management with features like a Power-On Reset (POR), an internal voltage regulator adjusting from 3.3V to 1.5V, an 8-to-24MHz external crystal oscillator, an internal 8MHz RC oscillator, and a PLL for the CPU clock.
+
+This chip is equipped with a 12-bit ADC supporting 8 channels at 1Mbps and a 6-channel DMA controller that supports peripherals like UARTs and SPIs. For general-purpose input/output, it has 53 I/Os. Its debugging capabilities are enhanced with Serial Wire Debug (SWD), and it supports multiple timers and PWMs, including a 32-bit watchdog timer, four 32-bit or 16-bit down-counters, and eight 32-bit counter/timers with a programmable 6-bit prescaler.
+
+For communication interfaces, the W7500 offers three UARTs (two with FIFO and Flow Control and one simple UART), two SPIs, and two I2C interfaces operating in Fast-mode (400 kbps). It also includes a crypto feature with a 32-bit RNG (Random Number Generator). The package is a 64 TQFP measuring 7x7 mm.
+
+For more information on specific aspects of the W7500, you can refer to the following links from the WIZnet documentation:
+
+- Pin Assignment: [https://docs.wiznet.io/Product/iMCU/W7500/pin-assignment](https://docs.wiznet.io/Product/iMCU/W7500/pin-assignment)
+- System and Memory: https://docs.wiznet.io/Product/iMCU/W7500/system-and-memory
+- Interrupt and Events: https://docs.wiznet.io/Product/iMCU/W7500/interrupt-and-event
+- Power Supply: https://docs.wiznet.io/Product/iMCU/W7500/power-supply
+- Booting Sequence: https://docs.wiznet.io/Product/iMCU/W7500/booting-sequence
+- Electrical Characteristics: https://docs.wiznet.io/Product/iMCU/W7500/electrical-characteristics-w7500
+- W7500 Reference Schematic: https://docs.wiznet.io/Product/iMCU/W7500/w7500-ref-schematic
+
+W7500 Pin Assignment:
+
+1. **Pin 1 (PC_08)** - Analog I/O: PWM0 / CAP0, GPIO3_8, SCL0, AIN7.
+2. **Pin 2 (PC_09)** - Analog I/O: PWM1 / CAP1, GPIO3_9, SDA0, AIN6.
+3. **Pin 3 (PC_10)** - Analog I/O: U_TXD2, GPIO3_10, PWM2 / CAP2, AIN5.
+4. **Pin 4 (PC_11)** - Analog I/O: U_RXD2, GPIO3_11, PWM3 / CAP3, AIN4.
+5. **Pin 5 (PC_12)** - Analog I/O: AIN3, GPIO3_12, SSEL0, AIN3.
+6. **Pin 6 (PC_13)** - Analog I/O: AIN2, GPIO3_13, SCLK0, AIN2.
+7. **Pin 7 (PC_14)** - Analog I/O: AIN1, GPIO3_14, MISO0, AIN1.
+8. **Pin 8 (PC_15)** - Analog I/O: AIN0, GPIO3_15, MOSI0, AIN0.
+9. **Pin 9 (GND)** - Ground.
+10. **Pin 10 (VDD)** - Power (VDD).
+11. **Pin 11 (PD_00)** - I/O: CRS/TXD3, GPIO4_0.
+12. **Pin 12 (PD_01)** - I/O: RXDV/TXD2, GPIO4_1.
+13. **Pin 13 (PD_02)** - I/O: RXD0/TXD1, GPIO4_2.
+14. **Pin 14 (PD_03)** - I/O: RXD1/TXD0, GPIO4_3.
+15. **Pin 15 (PD_04)** - I/O: RXD2/TXCLK, GPIO4_4.
+16. **Pin 16 (PB_06)** - I/O: RXD3/DUP, GPIO2_6.
+17. **Pin 17 (PB_07)** - I/O: RXCLK/RXCLK, GPIO2_7.
+18. **Pin 18 (PB_08)** - I/O: DUP/RXD3, GPIO2_8.
+19. **Pin 19 (PB_09)** - I/O: TXCLK/RXD2, GPIO2_9.
+20. **Pin 20 (PB_10)** - I/O: TXD0/RXD1, GPIO2_10.
+21. **Pin 21 (PB_11)** - I/O: TXD1/RXD0, GPIO2_11.
+22. **Pin 22 (PB_12)** - I/O: TXD2/RXDV, GPIO2_12.
+23. **Pin 23 (PB_13)** - I/O: TXD3/CRS, GPIO2_13.
+24. **Pin 24 (PB_04)** - I/O: TXEN, GPIO2_04.
+25. **Pin 25 (PB_05)** - I/O: COL, GPIO2_05.
+26. **Pin 26 (PB_14)** - I/O: MDIO/MDC, GPIO2_14.
+27. **Pin 27 (PB_15)** - I/O: MDC/MDIO, GPIO2_15.
+28. **Pin 28 (RSTn)** - Input: RSTn.
+29. **Pin 29 (PA_00)** - I/O: GPIO1_0, GPIO1_0, PWM6/CAP6.
+30. **Pin 30 (PA_01)** - I/O: TXD0/RXD1, GPIO1_1, PWM7/CAP7.
+31. **Pin 31 (PA_02)** - I/O: GPIO1_2, GPIO1_2, CLKOUT.
+32. **Pin 32 (TEST)** - Ground.
+33. **Pin 33 (PA_05)** - I/O: SSEL0, GPIO1_5, SCL1, PWM2/CAP2.
+34. **Pin 34 (PA_06)** - I/O: SCLK0, GPIO1_6, SDA1, PWM3/CAP3.
+35. **Pin 35 (PA_07)** - I/O: MISO0, GPIO1_7, U_CTS1, PWM4/CAP4.
+36. **Pin 36 (PA_08)** - I/O: MOSI0, GPIO1_8, U_RTS1, PWM5/CAP5.
+37. **Pin 37 (PA_09)** - I/O: SCL0, GPIO1_9, U_TXD1, PWM6/CAP6.
+38. **Pin 38 (PA_10)** - I/O: SDA0, GPIO1_10, U_RXD1, PWM7/CAP7.
+39. **Pin 39 (BOOT)** - I/O: BOOT.
+40. **Pin 40 (PA_11)** - I/O: U_CTS0, GPIO1_11, SSEL1.
+41. **Pin 41 (PA_12)** - I/O: U_RTS0, GPIO1_12, SCLK1.
+42. **Pin 42 (PA_13)** - I/O: U_TXD0, GPIO1_13, MISO1.
+43. **Pin 43 (PA_14)** - I/O: U_RXD0, GPIO1_14, MOSI1.
+44. **Pin 44 (PA_15)** - I/O: GPIO1_15.
+45. **Pin 45 (PB_00)** - I/O: SSEL1, GPIO2_0, U_CTS0.
+46. **Pin 46 (PB_01)** - I/O: SCLK1, GPIO2_1, U_RTS0.
+47. **Pin 47 (PB_02)** - I/O: MISO1, GPIO2_2, U_TXD0.
+48. **Pin 48 (PB_03)** - I/O: MOSI1, GPIO2_3, U_RXD0.
+49. **Pin 49 (PA_03)** - I/O: SWCLK, GPIO1_3, PWM0/CAP0.
+50. **Pin 50 (PA_04)** - I/O: SWDIO, GPIO1_4, PWM1/CAP1.
+51. **Pin 51 (PC_06)** - I/O: GPIO3_6, U_TXD2.
+52. **Pin 52 (PC_07)** - I/O: GPIO3_7, U_RXD2.
+53. **Pin 53 (PC_00)** - I/O: U_CTS1, GPIO3_0, PWM0/CAP0.
+54. **Pin 54 (PC_01)** - I/O: U_RTS1, GPIO3_1, PWM1/CAP1.
+55. **Pin 55 (PC_02)** - I/O: U_TXD1, GPIO3_2, PWM2/CAP2.
+56. **Pin 56 (PC_03)** - I/O: U_RXD1, GPIO3_3, PWM3/CAP3.
+57. **Pin 57 (PC_04)** - I/O: SCL1, GPIO3_4, PWM4/CAP4.
+58. **Pin 58 (PC_05)** - I/O: SDA1, GPIO3_5, PWM5/CAP5.
+59. **Pin 59 (GND)** - Ground.
+60. **Pin 60 (NC)** - Not Connected.
+61. **Pin 61 (VDD)** - Power (VDD).
+62. **Pin 62 (GND)** - Ground.
+63. **Pin 63 (XTAL_IN)** - Input: Xtal in.
+64. **Pin 64 (XTAL_OUT)** - Output: Xtal out.
+
+Each pin supports multiple functions, indicating the flexibility of the W7500 for various applications. For more detailed information, visit:
+
+- Pin Description: https://docs.wiznet.io/Product/iMCU/W7500/pin-assignment
+
+### W7500 **System and Memory:**
+
+The W7500 System and Memory components are intricate and well-designed, offering a robust architecture for efficient operations. The main system of the W7500 is composed of two masters: the Cortex-M0 core and the uDMAC (PL230, 6 channels). Additionally, it includes ten slaves, which are the Internal BOOT ROM, Internal SRAM, Internal Flash Memory, two AHB2APB bridges connecting all APB peripherals, four AHB dedicated to 16-bit GPIOs, and the TCP/IP Hardware core.
+
+The W7500 utilizes an AHB-Lite BUS that interconnects the two masters (Cortex-M0 and uDMAC) with the ten AHB slaves. Moreover, there are two APB BUSs present. These buses link seventeen APB peripherals, including a Watchdog, two dual timers, PWM, two UARTs, a simple UART, two I2Cs, two SSPs, a random number generator, a real-time clock, a 12-bits analog-digital converter, a clock controller, IO configuration, and a PAD MUX controller.
+
+Regarding memory organization, the W7500 features program memory, data memory, registers, and I/O ports, all organized within a single linear 4-Gbyte address space. The memory uses Little Endian format, where the lowest numbered byte in a word is considered the least significant, and the highest numbered byte is the most significant.
+
+Lastly, the W7500 includes a System Configuration Controller (SYSCFG). This controller serves several key functions, such as controlling the memory remap feature, enabling automatic reset in case of system lock-up, and providing information about the cause of the last reset.
+
+You can view the detailed W7500 System Architecture and Memory Map images at the following links:
+
+- W7500 System Architecture: https://docs.wiznet.io/assets/images/w7500_system_architecture-460810abc914b8992dde77f0345dc203.png
+- W7500 Memory Map: https://docs.wiznet.io/assets/images/memory_map-c93d02718998671ec158c3f6edc4134a.png
+
+### W7500 **Interrupt and Event:**
+
+The W7500 microcontroller features a comprehensive interrupt and event handling system. It contains 25 interrupt request (IRQ) lines, one NonMaskable Interrupt (NMI), and one event signal. These are designed to handle various types of system events and operations efficiently. Here's a summary of the interrupt assignments for the W7500:
+
+- **NMI (NonMaskable Interrupt)**: Associated with the Watchdog timer, this interrupt has an address of 0x0000_0008.
+- **IRQ Lines**: There are 25 IRQ lines, each assigned to different devices and functions. For instance:
+    - IRQ[0] to IRQ[3] are assigned to SSP0, SSP1, UART0, and UART1 respectively, handling their global interrupts.
+    - IRQ[4] to IRQ[7] cater to UART2, I2C0, I2C1, and GPIO0 global interrupts.
+    - This pattern continues up to IRQ[31], with each line designated for specific device functions like PWM channels, ADC acquisition end interrupt, TCPIP global interrupt, External pin interrupt, and several reserved for future use or specific internal functions.
+
+Additionally, the W7500 is capable of handling internal events to wake up the core (WFE). The wakeup event can be generated under specific conditions, such as when a DMA process is finished. This event-driven approach ensures that the W7500 can efficiently manage power and processing resources by responding to specific system needs as they occur.
+
+### W7500 **Power Supply:**
+
+The W7500 microcontroller incorporates a well-designed power supply system that ensures efficient power management and operation. Here's a detailed summary of its power supply features:
+
+1. **Voltage Regulation:**
+    - The W7500 embeds a voltage regulator to supply the internal 1.5V digital power domain.
+    - It requires an operating supply voltage (VDD) in the range of 2.7V to 5.5V.
+    - The ADC reference voltage is the same as VDD.
+    - The voltage regulator is always enabled post-reset and operates in only one mode. In Run mode, it supplies full power to the 1.5V domain, and there is no power-down or sleep mode.
+2. **Power Supply Supervisor:**
+    - The W7500 features an integrated reset (POR) circuit, which is always active and ensures proper operation above a threshold of 0.6V.
+    - The POR monitors only the VDD supply voltage. During the startup phase, VDD must be the first to arrive and be greater than or equal to 0.6V.
+3. **Low Power Modes:**
+    - After a system or power reset, the W7500 is in RUN mode.
+    - It offers two low power modes to save power when the CPU doesn't need to be active: Sleep mode and Deep Sleep mode. These are beneficial when the CPU is waiting for an external interrupt.
+    - Note that there is no power-off mode for the W7500.
+4. **Sleep Mode vs. Deep Sleep Mode:**
+    - Sleep Mode: Enters with DEEPSLEEP = 0 and Enable WFI/WFE. In this mode, the CPU clock is off, but APB, AHB, and Memory clocks remain on.
+    - Deep Sleep Mode: Enters with DEEPSLEEP = 1 and Enable WFI/WFE. This mode turns off the CPU, APB, AHB, and Memory clocks.
+    - Wakeup from both modes can be triggered by any interrupt or wakeup event.
+5. **Peripheral Clock Gating:**
+    - In Run mode, individual clocks can be stopped to reduce power consumption. This gating is controlled by the CRG block.
+    - Peripherals with clock gating options include ADC, SSP0, SSP1, UART0, UART1, two Timer clocks, 8 PWM clocks, WDOG, and the random number generator clock.
+
+Power consumption can also be reduced by slowing down system clocks or blocking clocks to peripherals when they are not in use. The W7500's power management capabilities are crucial for applications requiring efficient energy use, especially in IoT and embedded system environments.
+
+### W7500 Booting Sequence:
+
+The W7500 microcontroller offers three distinct boot modes, which can be selected using the BOOT and TEST pins. These modes determine how the W7500 starts up and operates. Here's a brief overview of the booting sequence and the modes available:
+
+1. **Mode Selection:**
+    - The boot mode is selected through a combination of the TEST and BOOT pin states.
+    - There are three modes based on the state of these pins:
+        - APP Mode (TEST=0, BOOT=0): In this mode, the W7500 executes user code from the Main Flash memory.
+        - ISP Mode (TEST=0, BOOT=1): The W7500 supports the ISP (In-System Programming) function in this mode, allowing control of the flash memory using a serial interface.
+2. **Operation of Boot Code:**
+    - Upon a hardware reset, the W7500 operates according to the embedded boot code.
+    - The specific operation of the boot code determines the initial behavior of the W7500 based on the selected boot mode.
+
+There is also a detailed flow diagram available that illustrates the operation of the boot code in the W7500. This diagram can be viewed at the following link:
+
+- Operation of Boot Code: https://docs.wiznet.io/assets/images/operation_boot_code-cdc1e965d7367ee90b09769f5fb87f50.jpg
+
+This booting sequence flexibility allows the W7500 to be adaptable for various applications, including those requiring specific startup routines or in-system programming capabilities.
+
+### W7500 **Electrical Characteristics: (다시)**
+
+The W7500 microcontroller is designed with a range of electrical characteristics that ensure its effective and reliable performance in various applications. Let's delve into its features:
+
+- **Absolute Maximum Ratings:** These ratings define the stress limits of the device. While the W7500 can technically operate at these extremes, such conditions are not meant for prolonged durations as they may impact the device's reliability.
+- **Voltage Characteristics:** The W7500 requires an external main supply voltage (VDD-VSS) between -0.3V to 3.6V. The input voltage on IO pins (VIN) should also be within the range of VSS - 0.3V to 3.6V. The device includes a voltage regulator for managing the I/O power slope, as well as specifications for variations between different VDD power pins and ground pins.
+- **Current Characteristics:** It details the total current into all VDD power lines, maximum current into each VDD power pin, total output current sunk by all IOs and control pins, and limits for single pin input injected current and sum of all input injected current.
+- **Thermal Characteristics:** The W7500 has a specified storage temperature range and a maximum junction temperature under bias, indicating its operational resilience under various temperature conditions.
+- **Operating Conditions:** These encompass the internal CPU clock frequency, standard operating voltage, input voltage on PIN, ambient temperature, and junction temperature range, defining the general environmental conditions under which the W7500 operates optimally.
+- **Supply Current Characteristics:** This includes the supply current details under normal operation, sleep mode, and deep sleep mode. The current consumption varies based on the system clock frequency and the operational mode of the device.
+- **I/O PAD Characteristics:** The DC specifications for the W7500 provide essential details about the I/O input high and low voltages, Schmitt trigger hysteresis, I/O input high and low currents, I/O output high and low voltages, and pull-up/pull-down resistor values.
+- **Flash Memory:** The endurance and data retention capabilities of the W7500's flash memory are highlighted, ensuring robust data storage and retrieval over extended periods.
+- **Electrical Sensitivity Characteristics:** These include the electrostatic discharge (ESD) and static latch-up specifications, critical for maintaining the integrity of the device in electrically volatile environments.
+- **ADC Characteristics:** This section details the analog-to-digital converter's features, including the analog input channels, reference voltage, resolution, and errors like integral non-linearity and differential non-linearity.
+    - 
+- **I2C Interface Characteristics:** It specifies the operational parameters for the I2C interface in both standard and fast modes, including clock frequency, clock periods, rise and fall times, data valid and hold times, and setup times.
+- **SSP Interface Characteristics:** The SSP interface characteristics are outlined, covering aspects like SSP clock frequency, data input setup and hold times, data output valid and hold times, and duty cycle in slave mode.
+- **Package Characteristics:** This includes detailed package dimension information and package footprint information, crucial for the physical integration of the W7500 into various hardware setups.
+
+These features make the W7500 a versatile and robust microcontroller suitable for a wide range of applications, particularly in fields requiring precise electrical and thermal management.
+
+- W7500 ADC transform function : [https://docs.wiznet.io/assets/images/adc_transform_function-cf17cafd7afaa624660b76c75649e839.jpg](https://docs.wiznet.io/assets/images/adc_transform_function-cf17cafd7afaa624660b76c75649e839.jpg)
+- W7500 I2C bus AC waveform : [https://docs.wiznet.io/assets/images/i2c_bus_ac_waveform-5a6edffaea5ef223730524a2deaf73a3.jpg](https://docs.wiznet.io/assets/images/i2c_bus_ac_waveform-5a6edffaea5ef223730524a2deaf73a3.jpg)
+- W7500 Package Dimension Information : [https://docs.wiznet.io/assets/images/package_dimention_information-049d6cc23bdaf2b696c9df2e163733df.png](https://docs.wiznet.io/assets/images/package_dimention_information-049d6cc23bdaf2b696c9df2e163733df.png)
+- W7500 Package Footprint Information : [https://docs.wiznet.io/assets/images/package_footprint_information-4a59e9ad1a5663ee15e9b0d2bba8d64f.jpg](https://docs.wiznet.io/assets/images/package_footprint_information-4a59e9ad1a5663ee15e9b0d2bba8d64f.jpg)
+
+## W7500 Reference Schematics
+
+The W7500 Reference Schematics provide valuable insights and guidelines for integrating the W7500 microcontroller with various PHYs. While these schematics are for reference only and the PHYs mentioned are not supported by WIZnet for technical issues, they offer a good starting point for circuit design. Here are the links to the reference schematics:
+
+1. **IC+ PHY:**
+    - W7500 Reference Schematic with IP101GA ([https://docs.wiznet.io/img/products/w7500/ref_sch/w7500_ref_schematic_v1.1_ip_.pdf](https://docs.wiznet.io/img/products/w7500/ref_sch/w7500_ref_schematic_v1.1_ip_.pdf))
+    - W7500 Reference Schematic with IP101GRI ([https://docs.wiznet.io/img/products/w7500/w7500_ip101gri_reference_sch_20170525.pdf](https://docs.wiznet.io/img/products/w7500/w7500_ip101gri_reference_sch_20170525.pdf))
+2. **Realtek PHY:**
+    - W7500 Reference Schematic with RTL8201CP-VD-LF([https://docs.wiznet.io/img/products/w7500/ref_sch/w7500_ref_schematic_v1.1_rtl_.pdf](https://docs.wiznet.io/img/products/w7500/ref_sch/w7500_ref_schematic_v1.1_rtl_.pdf))
+    - W7500 Reference Schematic with RTL8201F-VB-CG([https://docs.wiznet.io/img/products/w7500/w7500_rtl8201f_reference_sch.pdf](https://docs.wiznet.io/img/products/w7500/w7500_rtl8201f_reference_sch.pdf))
+
+These schematics are essential resources for anyone looking to develop hardware using the W7500 in conjunction with these specific PHY components. Remember, for technical support on the PHY components (IP101GA from IC+ and RTL8201CP from Realtek), it's advisable to contact the respective manufacturers directly.
+
+Here are the links to the W7500 documentation
+
+- W7500x Datasheet v1.1.0 - English: https://docs.wiznet.io/img/products/w7500/w7500x_ds_v110.pdf
+- W7500x Reference Manual v1.1.2 - English: https://docs.wiznet.io/img/products/w7500/w7500x_rm_v112_20181017_.pdf
+- How to Access W7500x PHY Register - English: https://docs.wiznet.io/img/products/w7500p/ref_sch/how_to_access_phy_application_note_v100.pdf
+- W7500P Internal PHY Datasheet - English: [http://www.bdtic.com/DataSheet/ICplus/IP101G_DS_R01_20121224.pdf](http://www.bdtic.com/DataSheet/ICplus/IP101G_DS_R01_20121224.pdf)
+- W7500x Erratasheet v1.2.0 - English: https://docs.wiznet.io/img/products/w7500/w7500x_erratasheet_v120e.pdf
+- W7500x Erratasheet v1.2.0 - Korean: https://docs.wiznet.io/img/products/w7500/w7500x_erratasheet_v120k.pdf
+- Limitation Note ARP problem in the NLB environment V1.0: https://docs.wiznet.io/img/products/w7500/w7500_arp_problem_in_the_nlb.pdf
+- How to install KEIL: https://docs.wiznet.io/Product/iMCU/W7500/documents/appnote/how_to_install_KEIL
+- How to make KEIL new project for W7500: https://docs.wiznet.io/Product/iMCU/W7500/documents/appnote/how-to-make-keil-new-project-for-w7500
+- How to use MDK for W7500 Peripherals Examples: https://docs.wiznet.io/Product/iMCU/W7500/documents/appnote/how-to-use-mdk-for-w7500-peripherals-examples
+- How to use GCC for W7500 Peripherals Examples: https://docs.wiznet.io/Product/iMCU/W7500/documents/appnote/how-to-use-gcc-for-w7500-peripherals-examples
+- How to use ISP tool: https://docs.wiznet.io/Product/iMCU/W7500/documents/appnote/how-to-use-isp-tool
+
+These documents cover a range of topics from datasheets and reference manuals to specific guides on using KEIL, MDK, GCC, and the ISP tool for the W7500.
+
+Here's the complete list of W7500 peripherals and examples, without any omissions:
+
+- W7500 GPIO: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/gpio
+- W7500 Blink-LED Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/blink-led
+- W7500 ADC: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/adc
+- W7500 Illumination-RGB-LED Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/illumination-sensor
+- W7500 DMA: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/dma
+- W7500 Memory to Memory Copy Example: (No direct link available)
+- W7500 CRG: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/crg
+- W7500 DualTimer: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/dualtimer
+- W7500 TimerRun Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/timerrun
+- W7500 EXTI: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/exti
+- W7500 LED-Toggle Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/led-toggle
+- W7500 Sleep Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/sleep
+- W7500 Flash: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/flash
+- W7500 IAP-Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/iap-example
+- W7500 I2C: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/i2c
+- W7500 Default Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/init
+- W7500 EEPROM-24LS02 Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/eeprom
+- W7500 Temperature LM75 Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/lm75-temperature
+- W7500 PWM: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/pwm
+- W7500 CaptureMode Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/capturemode
+- W7500 CounterMode Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/countermode
+- W7500 DeadZoneGeneration Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/deadzonegeneration
+- W7500 PWMOutput Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/pwmoutput
+- W7500 TimerMode Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/timermode
+- W7500 RNG: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/rng
+- W7500 Random Number Generation Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/rng-ex
+- W7500 SSP: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/ssp
+- W7500 Loopback Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/loopback
+- W7500 SD Card LED Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/sd-card-led
+- W7500 TOE: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/toe
+- W7500 DHCP Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/deladhcpclient
+- W7500 DNS Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/dmdnsclient
+- W7500 UART: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/uart
+- W7500 Interrupt Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/inter
+- W7500 Polling Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/polling
+- W7500 Printf Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/printf
+- W7500 UART Hardware Flow Control Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/flowcontrol
+- W7500 WDT: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/wdt
+- W7500 WDTReset Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/wdtreset
+- W7500 SysTick: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/systick
+- W7500 Delay Example: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/delay
+- W7500 AFC: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/afc
+- W7500 PADCON: https://docs.wiznet.io/Product/iMCU/W7500/Peripherals-internal/padcon
+
+Each link leads directly to the specific peripheral or example as it relates to the W7500.

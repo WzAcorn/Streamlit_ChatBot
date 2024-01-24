@@ -1,0 +1,89 @@
+# W5100S-io
+
+## W5100S-io Overview
+
+W5100S-io is a compact size network module that includes a W5100S (TCP/IP
+hardwired chip and PHY embedded).It can be used
+as a component and no effort is required to interface W5100S.
+The W5100S-io an ideal option for users who want to
+develop their Internet enabling systems rapidly. W5100S-io is hardware
+compatible with W5500-io and W6100-io.
+
+For the detailed information on implementation of Hardware TCP/IP, refer
+to the [W5100S Datasheet](https://docs.wiznet.io/Product/iEthernet/W5100S/document)
+
+## W5100S-io Hardware Specification[](https://docs.wiznet.io/Product/ioModule/W5100S-io#hardware-specification)
+
+[](https://docs.wiznet.io/Product/ioModule/W5100S-io#w5100s-io)
+
+- Plugin Network Module.
+- Hardware compatible with W5500-io, W6100-io.
+- Usable without H/W design for W5100S.
+- Fast evaluation for W5100S & MCU in the target board.
+- Support high speed SPI interface.
+- Support power down mode and Wake-on-LAN function
+
+### W5100S-io **Pin Description**
+
+```markdown
+| **Pin No.** |   | **Pin Type** | Pin Name  | **Description**                                      |
+|-------------|---|--------------|-----------|------------------------------------------------------|
+| J1          | **1** | **I**        | **RX_P**  | **RX_P**                                             |
+| :::         | **2** | **I**        | **RX_N**  | **RX_N**                                             |
+| :::         | **3** | **P**        | **RCT**   | **RX Center Tap**<br>This pin should be connect with external pulse transformer's RCT pin |
+| :::         | **4** | **P**        | **TCT**   | **TX Center Tap**<br>This pin should be connect with external pulse transformer's TCT pin |
+| :::         | **5** | **O**        | **TX_P**  | **TX_P**                                             |
+| :::         | **6** | **O**        | **TX_N**  | **TX_N**                                             || J2          | **1** | **P**        | **GND**  | **Ground**                                       |
+| :::         | **2** | **P**        | **GND**  | **Ground**                                       |
+| :::         | **3** | **I**        | **MOSI** | **Master Out Slave In**<br>This pin is used for SPI MOSI signal pin |
+| :::         | **4** | **I**        | **SCLK** | **SPI clock input**                              |
+| :::         | **5** | **I**        | **CSn**  | **Chip select input**                            |
+| :::         | **6** | **O**        | **INTn** | **Interrupt output**<br>Low: Interrupt asserted from W5100S<br>High: No interrupt |
+| :::         | **7** | **O**        | **LINK** | **LINK status output**<br>Low: Link<br>High: Un Link |
+| J3          | **1** | **P**        | **GND**  | **Ground**                                                                                           |
+| :::         | **2** | **P**        | **3.3V** | **Power**: 3.3V power supply                                                                         |
+| :::         | **3** | **P**        | **3.3V** | **Power**: 3.3V power supply                                                                         |
+| :::         | **4** | **-**        | **NC**   | **Not Connect**                                                                                      |
+| :::         | **5** | **I**        | **RSTn** | **Reset**: Low activity<br>Hold at least 500us after asserted to LOW and keep HIGH until next Reset needed. |
+| :::         | **6** | **O**        | **MISO** | **SPI Master In Slave Out**<br>This pin is used for SPI MISO signal pin                              |
+| :::         | **7** | **O**        | **ACTn** | **Active LED**<br>Low: Carrier sense from the active PMD<br>High: No carrier sense                  |
+```
+
+### W5100S-io DC Characteristic
+
+```markdown
+| Symbol | Parameter                                  | Pins | Min  | Typ  | Max  | Unit |
+|--------|--------------------------------------------|------|------|------|------|------|
+| V_DD   | **Supply voltage**                         | 3.3V | 2.97 | 3.3  | 3.63 | V    |
+| V_IL   | **High level input voltage**               | ALL  | 2.0  |      | 5.5  | V    |
+| V_IH   | **Low level input voltage**                | ALL  | -0.3 |      | 0.8  | V    |
+| V_OL   | **Low level output voltage**               | ALL  |      |      | 0.4  | V    |
+| V_OH   | **High level output voltage**              | ALL  | 2.4  |      |      | V    |
+| L_OL   | **Low level output Current**               | ALL  | 8.6  | 13.9 | 18.9 | mA   |
+| L_OH   | **High level output Current**              | ALL  | 12.5 | 26.9 | 47.1 | mA   |
+| I_DD   | **Supply Current<br>(Normal operation mode)** | 3.3V |      | 132  |      | mA   |
+| L_OH   | **Supply Current<br>(Power Down mode)**    | 3.3V |      | 13   |      | mA   |
+```
+
+### W5100S-io **Power Dissipation**
+
+```markdown
+| Condition                       | Min | Typ | Max | Unit |
+| ------------------------------- | --- | --- | --- | ---- |
+| 100M Link                       | \-  | 93 | 110  | mA   |
+| 10M Link                        | \-  | 93  | 210  | mA   |
+| Un-Link (Auto-negotiation mode) | \-  | 43  | 170 | mA   |
+| Power Down mode                 | \-  | 10  | 20  | mA   |
+```
+
+## W5100S-io SPI Operations
+
+As W5100S-io consists of W5100S and others, SPI operation of W5100S-io
+follows one of W5100S. For more information about SPI operation of
+W5100S-io, please refer to [W5100S Datasheet](https://docs.wiznet.io/Product/iEthernet/W5100S/document)
+
+## W5100S-io Dimension[](https://docs.wiznet.io/Product/ioModule/W5100S-io#dimension)
+
+- W5100S-io V100 Dimension
+    - 24mm x 20mm x 1.0mm ( PCB board size )
+    - 24mm x 20mm x 2.6mm ( Included part size )

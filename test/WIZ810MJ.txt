@@ -1,0 +1,21 @@
+# WIZ810MJ
+
+# **WIZ810MJ** Overview:[](https://docs.wiznet.io/Product/ioModule/wiz810mj#overview)
+
+WIZ810MJ is the network module that includes W5100 (TCP/IP, MAC & PHY) & MAG-JACK (RJ45 with X’FMR) with other glue logics. It can be used as a component and no effort is required to interface W5100 & MAG Jack. The WIZ810MJ is an ideal option for users who want to develop their Internet enabling systems rapidly.
+
+More information is available at [https://docs.wiznet.io/Product/ioModule/wiz810mj](https://docs.wiznet.io/Product/ioModule/wiz810mj).
+
+---
+
+# WIZ810MJ Features:
+
+The WIZ810MJ is a plug-in network module that can be used without separate hardware design for W5100, transformer, and RJ-45, supports MCU bus and high-speed SPI interface, has four hardware sockets, and has an operating temperature range of -40 to 85℃.
+
+---
+
+# WIZ810MJ Datasheet:
+
+Check it out at this link: [https://docs.wiznet.io/img/products/wiz810mj/WIZ810MJ_DS_V130E.pdf](https://docs.wiznet.io/img/products/wiz810mj/WIZ810MJ_DS_V130E.pdf)
+
+---

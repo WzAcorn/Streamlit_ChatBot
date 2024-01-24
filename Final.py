@@ -41,7 +41,7 @@ st.markdown("""
     }
     </style>
     <div class="title">💬 WiZnet Chatbot Test</div>
-    <div>민윤홍의 개인 공부용 배포 웹사이트 입니다. 기능이 완전 동작하지 않아요.</div>
+    <div>에이콘 상의 개인 공부용 배포 웹사이트 입니다. 기능이 완전 동작하지 않아요.</div>
 
     """, unsafe_allow_html=True)
 st.write("---")
@@ -70,10 +70,19 @@ def load_and_split_documents(file_path):
         
         # 일반 텍스트 파일 로드
         else:
-            print("일반 텍스트 로오오드")
-            loader = DirectoryLoader(file_path, glob="*.txt", loader_cls=TextLoader)
+            loader = DirectoryLoader(file_path, glob="**/*.txt", loader_cls=TextLoader, encoding='utf-8')
+            print(f"Loading files from: {file_path}")  # 경로 출력
             documents = loader.load()
             print(documents)
+
+            if not documents:
+                print("No documents were loaded.")
+            else:
+                print(f"Loaded {len(documents)} documents.")
+                for doc in documents:
+                    print(f"Loaded file: {doc}")  # 'source'는 파일 경로를 나타내는 속성입니다. 실제 속성명은 다를 수 있습니다.
+
+
         
         # 문서 분할
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
@@ -84,7 +93,9 @@ def load_and_split_documents(file_path):
         st.error(f"문서 로딩 중 오류 발생: {e}")
         return []
 
-texts = load_and_split_documents('./test')  # 문서 경로 지정
+texts = load_and_split_documents('./test')
+
+
 
 # 벡터 데이터베이스 구성
 vectordb = Chroma.from_documents(
@@ -203,3 +214,7 @@ for i, msg in enumerate(st.session_state.messages):
         message(msg.content, is_user=True, key=f"message_{i}_user")
     elif isinstance(msg, AIMessage):
         message(msg.content, is_user=False, key=f"message_{i}_ai")
+        
+
+
+
