@@ -53,6 +53,7 @@ load_dotenv()
 persist_directory = 'db'
 embedding = OpenAIEmbeddings()
 
+# 일반 텍스트 파일 로드 함수 수정
 def load_and_split_documents(file_path):
     try:
         # PDF 파일 로드
@@ -64,22 +65,29 @@ def load_and_split_documents(file_path):
         elif file_path.endswith('.json'):
             with open(file_path, 'r', encoding='utf-8') as file:
                 json_data = json.load(file)
-                # JSON 파일에서 'content' 키의 값을 추출하여 리스트로 변환
                 documents = [json_data['content']]
         
         # 일반 텍스트 파일 로드
         else:
-            loader = DirectoryLoader(file_path, glob="**/*.txt", loader_cls=TextLoader, encoding='utf-8')
-            print(f"Loading files from: {file_path}")  # 경로 출력
+            text_loader = TextLoader(encoding='utf-8')  # TextLoader에 encoding 인자 사용
+            loader = DirectoryLoader(file_path, glob="**/*.txt", loader_cls=lambda path: text_loader.load(path))
             documents = loader.load()
-            print(documents)
 
             if not documents:
                 print("No documents were loaded.")
             else:
                 print(f"Loaded {len(documents)} documents.")
                 for doc in documents:
-                    print(f"Loaded file: {doc}")  # 'source'는 파일 경로를 나타내는 속성입니다. 실제 속성명은 다를 수 있습니다.
+                    print(f"Loaded file: {doc['source']}")  # 문서의 출처(파일 경로) 출력
+
+        # 문서 분할 로직은 이전과 동일
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
+        texts = text_splitter.split_documents(documents)
+        return texts
+    
+    except Exception as e:
+        st.error(f"문서 로딩 중 오류 발생: {e}")
+        return []
 
 
         
@@ -92,24 +100,23 @@ def load_and_split_documents(file_path):
         st.error(f"문서 로딩 중 오류 발생: {e}")
         return []
 
-texts = load_and_split_documents('./test')
-
+#texts = load_and_split_documents(r'C:\workspace\개인 공부\Streamlit_ChatBot\test')
 
 
 # 벡터 데이터베이스 구성
-vectordb = Chroma.from_documents(
-    documents=texts,
-    embedding=embedding,
-    persist_directory=persist_directory)
+# vectordb = Chroma.from_documents(
+#     documents=texts,
+#     embedding=embedding,
+#     persist_directory=persist_directory)
 
-vectordb = Chroma(
-    persist_directory = persist_directory, 
-    embedding_function=embedding)
+# vectordb = Chroma(
+#     persist_directory = persist_directory, 
+#     embedding_function=embedding)
 
-print(vectordb)
+# print(vectordb)
 
-# 검색 기능 설정
-retriever = vectordb.as_retriever(search_kwargs={"k":2})
+# # 검색 기능 설정
+# retriever = vectordb.as_retriever(search_kwargs={"k":2})
 
 prompt_template = """
 <Information>
@@ -169,17 +176,8 @@ llm = ChatOpenAI(
 qa_chain = RetrievalQA.from_chain_type(
     llm=llm, 
     chain_type="stuff", 
-    retriever=retriever, 
-    return_source_documents=True,
     chain_type_kwargs=chain_type_kwargs,
 )
-
-def process_llm_response(llm_response):
-    if isinstance(llm_response, dict) and "source_documents" in llm_response:
-        sources = "\n".join([source.metadata['source'] for source in llm_response["source_documents"]])
-        return f"{llm_response.get('result', '죄송합니다. 답변을 생성할 수 없습니다.')}\n\n관련 소스:\n{sources}"
-    else:
-        return "죄송합니다. 답변을 생성할 수 없습니다."
 
 
 st.header("WizBot 에게 질문해보세요!!")
@@ -202,10 +200,9 @@ if user_input:
     # 챗봇 응답 생성
     with st.spinner("답변 생성 중..."):
         result = qa_chain({"query": user_input})
-        response_t = process_llm_response(result)
     
     # 챗봇 응답을 세션 상태에 추가
-    st.session_state.messages.append(AIMessage(content=response_t))
+    st.session_state.messages.append(AIMessage(content=result))
 
 #대화 이력 표시
 for i, msg in enumerate(st.session_state.messages):
