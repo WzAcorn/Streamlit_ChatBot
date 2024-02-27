@@ -89,34 +89,23 @@ def load_and_split_documents(file_path):
         st.error(f"문서 로딩 중 오류 발생: {e}")
         return []
 
-
-        
-        # 문서 분할
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
-        texts = text_splitter.split_documents(documents)
-        return texts
-    
-    except Exception as e:
-        st.error(f"문서 로딩 중 오류 발생: {e}")
-        return []
-
-#texts = load_and_split_documents(r'C:\workspace\개인 공부\Streamlit_ChatBot\test')
+texts = load_and_split_documents('test')
 
 
-# 벡터 데이터베이스 구성
-# vectordb = Chroma.from_documents(
-#     documents=texts,
-#     embedding=embedding,
-#     persist_directory=persist_directory)
+#벡터 데이터베이스 구성
+vectordb = Chroma.from_documents(
+    documents=texts,
+    embedding=embedding,
+    persist_directory=persist_directory)
 
-# vectordb = Chroma(
-#     persist_directory = persist_directory, 
-#     embedding_function=embedding)
+vectordb = Chroma(
+    persist_directory = persist_directory, 
+    embedding_function=embedding)
 
-# print(vectordb)
+print(vectordb)
 
-# # 검색 기능 설정
-# retriever = vectordb.as_retriever(search_kwargs={"k":2})
+# 검색 기능 설정
+retriever = vectordb.as_retriever(search_kwargs={"k":2})
 
 prompt_template = """
 <Information>
